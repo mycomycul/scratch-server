@@ -8,11 +8,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace scratch
 {
+    /// <summary>
+    /// Provides startup configuration.async First the host is configured and started in Main and then the 
+    /// app is configured and started in the startup class
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
             var host = new WebHostBuilder()
+            //Allows the project to find the root directory for views etc.
+            //Be sure to also include the "Microsoft.Extensions.Configuration.FileExtensions" package
+            .UseContentRoot(Directory.GetCurrentDirectory())
             .UseKestrel()
             .UseStartup<Startup>()
             .Build();
